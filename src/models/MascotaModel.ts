@@ -1,5 +1,4 @@
 import {Model} from 'sequelize';
-import AgenteController from '../controllers/MascotaController';
 
 interface MascotaAttributes {
     mascotaID:string;
@@ -23,7 +22,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     }
     Mascota.init({
         mascotaID:{
-            type: DataTypes.integer,
+            type: DataTypes.INTEGER,
             autoIncrement:true,
             primaryKey: true,
             allowNull:false
