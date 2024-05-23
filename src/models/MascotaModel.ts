@@ -1,5 +1,5 @@
 import {Model} from 'sequelize';
-import AgenteController from '../controllers/AgenteController';
+import AgenteController from '../controllers/MascotaController';
 
 interface MascotaAttributes {
     mascotaID:string;

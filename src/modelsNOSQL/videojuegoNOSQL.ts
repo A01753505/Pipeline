@@ -3,23 +3,16 @@ import joi from 'joi';
 import { PREFIX_NAME } from '../config';
 
 
-const UserModel = dynamodb.define('user',{
-    hashKey:'awsCognitoId',
-    timestamps:true,
+const VideojuegoModel = dynamodb.define('videojuego',{
+    hashKey:'videojuegoID',
+    timestamps:false,
     schema:{
-        awsCognitoId: joi.string().required(),
+        videojuegoID: dynamodb.types.uuid(),
 		pais: joi.string().required(),
 		autor: joi.string().required(),
 		version: joi.string().required(),
     },
-    tableName:`Videojuego${PREFIX_NAME}`,
-    indexes: [
-		{
-			hashKey: 'email',
-			pais: 'EmailIndex',
-			type: 'global',
-		},
-	],
+    tableName:`Videojuego${PREFIX_NAME}`
 });
 
 
@@ -29,4 +22,4 @@ dynamodb.createTables((err:any)=>{
     console.log('Tabla creada exitosamente');
 })
 
-export default UserModel;
+export default VideojuegoModel;
