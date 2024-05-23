@@ -1,6 +1,6 @@
 //const express = require('express'); //JS
 import express, {Request, Response} from 'express'; //TS
-import AbstractController from '../controllers/AbstractController';
+import AbstractController from '../controllers/AbstractControllers';
 import db from '../models';
 
 class Server{
@@ -16,15 +16,15 @@ class Server{
         this.env = appInit.env;
         this.loadmiddlewares(appInit.middlewares);
         this.loadRoutes(appInit.controllers);
-        this.connectDB();        
-        
+        this.connectDB();
+
     }
 
     private loadRoutes(controllers:AbstractController[]):void{
         this.app.get('/',(req:Request,res:Response)=>{
             res.status(200).send('Hello world');
         })
-        
+
         controllers.forEach((controller:AbstractController )=> {
             this.app.use(`/${controller.prefix}`,controller.router);
         })
@@ -43,7 +43,7 @@ class Server{
     public init(){
         this.app.listen(this.port,()=>{
             console.log(`Server running on port ${this.port}`);
-        })       
+        })
     }
 
 }
