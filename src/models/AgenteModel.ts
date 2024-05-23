@@ -1,50 +1,49 @@
-import {Model,Sequelize} from 'sequelize';
+import {Model} from 'sequelize';
 import AgenteController from '../controllers/AgenteController';
 
-interface AgenteAttributes {
-    awsCognitoId:string;
+interface MascotaAttributes {
+    mascotaID:string;
     nombre:string;
-    rol:string;
-    email:string;
+    tipo:string;
+    color:string;
 }
 
-export enum UserRoles{
-    ADMIN = 'ADMIN',
-    SUPERVISOR = "SUPERVISOR",
-    AGENT = "AGENT"
-  }
+module.exports = (sequelize:any, DataTypes:any) => {
+    class Mascota extends Model<MascotaAttributes> implements MascotaAttributes{
 
-module.exports = (sequelize:any,DataTypes:any) => {
-    class Agente extends Model<AgenteAttributes> implements AgenteAttributes{
-        public awsCognitoId!:string;
+        public mascotaID!:string;
         public nombre!:string;
-        public rol!: string;;
-        public email!:string;
+        public tipo!:string;
+        public color!:string;
 
         static associate(models:any){
 
         }
 
     }
-    Agente.init({
-        awsCognitoId:{
-            type: DataTypes.STRING,
-            allowNull:false,
-            primaryKey: true
+    Mascota.init({
+        mascotaID:{
+            type: DataTypes.integer,
+            autoIncrement:true,
+            primaryKey: true,
+            allowNull:false
         },
         nombre:{
             type:DataTypes.STRING,
             allowNull:false
         },
-        rol:DataTypes.STRING,
-        email:{
-            type:DataTypes.STRING(50),
+        tipo: {
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        color:{
+            type:DataTypes.STRING(30),
             allowNull:false
         }
     },{
         sequelize,
-        modelName:'Agente'
+        modelName:'Mascota'
     });
-    return Agente;
+    return Mascota;
 
 }
