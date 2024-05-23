@@ -2,26 +2,21 @@ import dynamodb from '../services/dynamoService';
 import joi from 'joi';
 import { PREFIX_NAME } from '../config';
 
-export enum UserRoles {
-	ADMIN = 'ADMIN',
-	SUPERVISOR = 'SUPERVISOR',
-	AGENT = 'AGENT'
-}
 
 const UserModel = dynamodb.define('user',{
     hashKey:'awsCognitoId',
     timestamps:true,
     schema:{
         awsCognitoId: joi.string().required(),
-		name: joi.string().required(),
-		role: joi.string().required().default(UserRoles.AGENT),
-		email: joi.string().required().email(),
+		pais: joi.string().required(),
+		autor: joi.string().required(),
+		version: joi.string().required(),
     },
-    tableName:`Agente${PREFIX_NAME}`,
+    tableName:`Videojuego${PREFIX_NAME}`,
     indexes: [
 		{
 			hashKey: 'email',
-			name: 'EmailIndex',
+			pais: 'EmailIndex',
 			type: 'global',
 		},
 	],
